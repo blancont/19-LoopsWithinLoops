@@ -3,15 +3,15 @@ This project demonstrates NESTED LOOPS (i.e., loops within loops)
 in the context of TWO-DIMENSIONAL GRAPHICS.
 
 Authors: David Mutchler, Valerie Galluzzi, Mark Hays, Amanda Stouder,
-         their colleagues and PUT_YOUR_NAME_HERE.
-"""  # TODO: 1. PUT YOUR NAME IN THE ABOVE LINE.
+         their colleagues and Nathaniel Blanco.
+"""  # DONE: 1. PUT YOUR NAME IN THE ABOVE LINE.
 
 import rosegraphics as rg
 
 
 def main():
     """ Calls the other functions to demonstrate them. """
-    run_test_draw_L()
+    #run_test_draw_L()
     run_test_draw_wall_on_right()
 
 
@@ -80,9 +80,35 @@ def draw_L(window, circle, r, c):
     and m and n are small, positive integers.
     """
     # ------------------------------------------------------------------
-    # TODO: 2. Implement and test this function.
+    # DONE: 2. Implement and test this function.
     #     The testing code is already written for you (above).
     # ------------------------------------------------------------------
+    for k in range(r):
+        for j in range(3):
+            new_circle = circle.clone()
+            new_circle.center = rg.Point(circle.center.x + 2 * j * circle.radius,
+                                         circle.center.y + 2 * k * circle.radius)
+            new_circle.fill_color = circle.fill_color
+            new_circle.attach_to(window)
+            window.render(0.1)
+
+    for k in range(3):
+        for j in range(3):
+            new_circle = circle.clone()
+            new_circle.center = rg.Point(circle.center.x + 2 * j * circle.radius,
+                                         circle.center.y + circle.radius * (2 * k + 2 * r))
+            new_circle.fill_color = circle.fill_color
+            new_circle.attach_to(window)
+            window.render(0.1)
+
+    for k in range(3):
+        for j in range(c):
+            new_circle = circle.clone()
+            new_circle.center = rg.Point(circle.center.x + circle.radius * (6 + 2 * j),
+                                         circle.center.y + circle.radius * (2 * r + 2 * k))
+            new_circle.fill_color = circle.fill_color
+            new_circle.attach_to(window)
+            window.render(0.1)
 
 
 def run_test_draw_wall_on_right():
@@ -121,9 +147,18 @@ def draw_wall_on_right(rectangle, n, window):
     and n is a small, positive integer.
     """
     # ------------------------------------------------------------------
-    # TODO: 3. Implement and test this function.
+    # DONE: 3. Implement and test this function.
     #     The testing code is already written for you (above).
     # ------------------------------------------------------------------
+    for k in range(n):
+        for j in range(k + 1):
+            p1 = rg.Point(rectangle.corner_1.x - rectangle.get_width() * j,
+                          rectangle.corner_1.y + rectangle.get_height() * k)
+            p2 = rg.Point(rectangle.corner_2.x - rectangle.get_width() * j,
+                          rectangle.corner_2.y + rectangle.get_height() * k)
+            new_rectangle = rg.Rectangle(p1, p2)
+            new_rectangle.attach_to(window)
+            window.render(0.1)
 
 
 # ----------------------------------------------------------------------
